@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Business;
 using Business.Account;
+using Business.Category;
 using Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -83,7 +84,8 @@ namespace eProjectAPI
             // chỗ cấu hình handeler (Dependency Injection)
             //account
             services.AddScoped<IAccountHandler, AccountHandler>();
-
+            // category 
+            services.AddScoped<ICategoryHandler, CategoryHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
