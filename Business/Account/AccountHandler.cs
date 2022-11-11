@@ -95,10 +95,6 @@ namespace Business
         {
             var list = await _myDbContext.Account.ToListAsync();
 
-            if(getAllAccount.Islock == true)
-            {
-                list = list.Where(x => x.Islock == true).ToList();
-            }
             if(getAllAccount.Islock == false)
             {
                 list = list.Where(x => x.Islock == false).ToList();
