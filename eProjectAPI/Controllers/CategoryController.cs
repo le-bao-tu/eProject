@@ -29,7 +29,7 @@ namespace eProjectAPI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Route("getAllCategory")]
         [Authorize]
         [ProducesResponseType(typeof(ResponseObject<List<CategoryModel>>), StatusCodes.Status200OK)]

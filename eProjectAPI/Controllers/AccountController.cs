@@ -41,7 +41,7 @@ namespace eProjectAPI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Route("getAllAccount")]
         [Authorize]
         public async Task<IActionResult> getAllAccount(GetAllAccountModel model)

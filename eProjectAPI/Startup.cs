@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Business;
 using Business.Account;
+using Business.Brand;
 using Business.Category;
+using Business.Certify;
+using Business.Goldk;
+using Business.SubCategory;
 using Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -86,6 +90,15 @@ namespace eProjectAPI
             services.AddScoped<IAccountHandler, AccountHandler>();
             // category 
             services.AddScoped<ICategoryHandler, CategoryHandler>();
+            //brand 
+            services.AddScoped<IBrandHandller, BrandHandller>();
+            //Goldk
+            services.AddScoped<IGoldkHandller, GoldkHandller>();
+            // Certify
+            services.AddScoped<ICertifyHandller, CertifyHandller>();
+            // SubCategory 
+            services.AddScoped<ISubCategoryHandller, SubCategoryHandller>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
