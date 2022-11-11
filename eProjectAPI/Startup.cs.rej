@@ -1,0 +1,16 @@
+diff a/eProjectAPI/Startup.cs b/eProjectAPI/Startup.cs	(rejected hunks)
+@@ -6,6 +6,14 @@
+  using AutoMapper;
+  using Business;
+  using Business.Account;
+++<<<<<<< Updated upstream
+++=======
++ using Business.Brand;
++ using Business.Category;
++ using Business.Certify;
++ using Business.Goldk;
++ using Business.SubCategory;
+++>>>>>>> Stashed changes
+  using Data;
+  using Microsoft.AspNetCore.Authentication.JwtBearer;
+  using Microsoft.AspNetCore.Builder;
