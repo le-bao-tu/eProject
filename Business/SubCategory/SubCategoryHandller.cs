@@ -25,11 +25,11 @@ namespace Business.SubCategory
             int rs = await _myDbContext.SaveChangesAsync();
             if(rs > 0)
             {
-                return new ResponseObject<SubcategoModel>(model, "Thêm mới thành công", Code.Success);
+                return new ResponseObject<SubcategoModel>(model, $"{Message.CreateSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Thêm mới thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.CreateError}");
             }
         }
 
@@ -40,11 +40,11 @@ namespace Business.SubCategory
             int rs = await _myDbContext.SaveChangesAsync();
             if(rs > 0)
             {
-                return new ResponseObject<Guid>(subId, "Xóa dữ liệu thành công", Code.Success);
+                return new ResponseObject<Guid>(subId, $"{Message.DeleteSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Xóa dữ liệu thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.DeleteError}");
             }
         }
 
@@ -77,11 +77,11 @@ namespace Business.SubCategory
             var entity = AutoMapperUtils.AutoMap<Data.DataModel.Subcategory, SubcategoModel>(data);
             if (entity != null)
             {
-                return new ResponseObject<List<SubcategoModel>>(entity, "Lấy dữ liệu thành công ", Code.Success);
+                return new ResponseObject<List<SubcategoModel>>(entity, $"{Message.GetDataSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Lấy dữ liệu thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.GetDataError}");
             }
         }
 
@@ -91,11 +91,11 @@ namespace Business.SubCategory
             var entity = AutoMapperUtils.AutoMap<Data.DataModel.Subcategory, SubcategoModel>(data);
             if(entity != null)
             {
-                return new ResponseObject<SubcategoModel>(entity, "Lấy dữ liệu thành công", Code.Success);
+                return new ResponseObject<SubcategoModel>(entity, $"{Message.GetDataSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Lấy dữ liệu thất bai");
+                return new ResponseError(Code.ServerError, $"{Message.GetDataError}");
             }
         }
 
@@ -110,11 +110,11 @@ namespace Business.SubCategory
             var entity = AutoMapperUtils.AutoMap<Data.DataModel.Subcategory, SubcategoModel>(data);
             if(entity != null)
             {
-                return new ResponseObject<List<SubcategoModel>>(entity, "Lấy dữ liệu thành công ", Code.Success);
+                return new ResponseObject<List<SubcategoModel>>(entity, $"{Message.GetDataSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Lấy dữ liệu thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.GetDataError}");
             }
         }
 
@@ -125,11 +125,11 @@ namespace Business.SubCategory
             int rs = await _myDbContext.SaveChangesAsync();
             if(rs > 0)
             {
-                return new ResponseObject<SubcategoModel>(model, "Cập nhâth thành công", Code.Success);
+                return new ResponseObject<SubcategoModel>(model, $"{Message.UpdateSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Cập nhật thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.GetDataError}");
             }
         }
     }

@@ -55,4 +55,11 @@ namespace Business.Account
         public int State { get; set; }
     }
 
+    public class UpdatePawwordModel
+    {
+        public Guid UserId { get; set; }
+
+        public string Password { get; set; }
+    }
+
 }

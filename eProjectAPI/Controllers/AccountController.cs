@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shared;
 
 namespace eProjectAPI.Controllers
 {
@@ -24,6 +25,48 @@ namespace eProjectAPI.Controllers
             _accountHandler = accountHandler;
         }
 
+        #region luồng quên mật khẩu 
+        /// <summary>
+        ///  Lấy mã truy cập , để đổi mật khẩu 
+        /// </summary>
+        /// <param name="accountModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("get/access_code")]
+        [ProducesResponseType(typeof(ResponseObject<String>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAccessCode(string email)
+        {
+            return Ok(await _accountHandler.GetAccessCode(email));
+        }
+
+        /// <summary>
+        /// check email và access_code 
+        /// </summary>
+        /// <param name="accountModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("check/access_code")]
+        [ProducesResponseType(typeof(ResponseObject<Guid>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> CheckAccessCode(string email , string access_code)
+        {
+            return Ok(await _accountHandler.CheckAccessCode(email,access_code));
+        }
+
+
+        /// <summary>
+        /// cập nhật mật khẩu mới 
+        /// </summary>
+        /// <param name="accountModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("update/password")]
+        [ProducesResponseType(typeof(ResponseObject<UpdatePawwordModel>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdatePassword(UpdatePawwordModel model)
+        {
+            return Ok(await _accountHandler.UpdatePassword(model));
+        }
+        #endregion
+
         /// <summary>
         ///  đăng nhấp trả về Token 
         /// </summary>
@@ -31,11 +74,13 @@ namespace eProjectAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Login")]
+        [ProducesResponseType(typeof(ResponseObject<LoginAccountModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> login(LoginAccountModel accountModel)
         {
             return Ok(await _accountHandler.Login(accountModel));
         }
 
+     
         /// <summary>
         /// Lấy da danh sách tài khoản 
         /// </summary>
@@ -44,6 +89,7 @@ namespace eProjectAPI.Controllers
         [HttpPost]
         [Route("getAllAccount")]
         [Authorize]
+        [ProducesResponseType(typeof(ResponseObject<List<GetAllAccountModel>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> getAllAccount(GetAllAccountModel model)
         {
             return Ok(await _accountHandler.GetAllAccount(model));
@@ -56,7 +102,7 @@ namespace eProjectAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("insertAccount")]
-
+        [ProducesResponseType(typeof(ResponseObject<AccountModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> insertAccount([FromBody] AccountModel account)
         {
             return Ok(await _accountHandler.CreateAccount(account));
@@ -70,6 +116,7 @@ namespace eProjectAPI.Controllers
         [HttpPut]
         [Route("updateAccount")]
         [Authorize]
+        [ProducesResponseType(typeof(ResponseObject<AccountModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> updateAccount([FromBody] AccountModel account)
         {
             return Ok(await _accountHandler.UpdateAccount(account));
@@ -83,6 +130,7 @@ namespace eProjectAPI.Controllers
         [HttpDelete]
         [Route("deleteAccount")]
         [Authorize]
+        [ProducesResponseType(typeof(ResponseObject<Guid>), StatusCodes.Status200OK)]
         public async Task<IActionResult> deleteAccount(Guid id)
         {
             return Ok(await _accountHandler.DeleteAccount(id));
@@ -96,6 +144,7 @@ namespace eProjectAPI.Controllers
         [HttpGet]
         [Route("getAccountById")]
         [Authorize]
+        [ProducesResponseType(typeof(ResponseObject<Guid>), StatusCodes.Status200OK)]
         public async Task<IActionResult> getAccountById(Guid id)
         {
             return Ok(await _accountHandler.GetAccountById(id));
@@ -109,6 +158,7 @@ namespace eProjectAPI.Controllers
         [HttpGet]
         [Route("getAccountByName")]
         [Authorize]
+        [ProducesResponseType(typeof(ResponseObject<String>), StatusCodes.Status200OK)]
         public async Task<IActionResult> getAccountByName(string name)
         {
             return Ok(await _accountHandler.GetAccountByName(name));
