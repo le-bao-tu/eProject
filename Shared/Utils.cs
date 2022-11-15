@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -169,6 +170,70 @@ namespace Shared
                 Console.WriteLine(e.Message);
                 return "Gui mail that bai : " + e.Message;
             }
+        }
+
+        /// <summary>
+        /// RanDom mã code khi quên mật khẩu 
+        /// </summary>
+        /// <param name="numericLength"></param>
+        /// <param name="lCaseLength"></param>
+        /// <param name="uCaseLength"></param>
+        /// <param name="specialLength"></param>
+        /// <returns></returns>
+        public static string RandomPassword(int numericLength, int lCaseLength, int uCaseLength, int specialLength)
+        {
+            Random random = new Random();
+
+            //char set random
+            string PASSWORD_CHARS_LCASE = "abcdefgijkmnopqrstwxyz";
+            string PASSWORD_CHARS_UCASE = "ABCDEFGHJKLMNPQRSTWXYZ";
+            string PASSWORD_CHARS_NUMERIC = "1234567890";
+            string PASSWORD_CHARS_SPECIAL = "!@#$%^&*()-+<>?";
+            if ((numericLength + lCaseLength + uCaseLength + specialLength) < 8)
+                return string.Empty;
+            else
+            {
+                //get char
+                var strNumeric = new string(Enumerable.Repeat(PASSWORD_CHARS_NUMERIC, numericLength)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+
+                var strUper = new string(Enumerable.Repeat(PASSWORD_CHARS_UCASE, uCaseLength)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+
+                var strSpecial = new string(Enumerable.Repeat(PASSWORD_CHARS_SPECIAL, specialLength)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+
+                var strLower = new string(Enumerable.Repeat(PASSWORD_CHARS_LCASE, lCaseLength)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+
+                //result : ký tự số + chữ hoa + chữ thường + các ký tự đặc biệt > 8
+                var strResult = strNumeric + strUper + strSpecial + strLower;
+                return strResult;
+            }
+        }
+
+        public static string RandomStyleCode()
+        {
+            Random ran = new Random();
+
+            String b = "abcdefghijklmnopqrstuvwxyz0123456789";
+            String sc = "!@#$%^&*~";
+
+            int length = 6;
+
+            String random = "";
+
+            for (int i = 0; i < length; i++)
+            {
+                int a = ran.Next(b.Length); //string.Lenght gets the size of string
+                random = random + b.ElementAt(a);
+            }
+            for (int j = 0; j < 2; j++)
+            {
+                int sz = ran.Next(sc.Length);
+                random = random + sc.ElementAt(sz);
+            }
+            return random;
         }
 
     }

@@ -81,7 +81,17 @@ namespace Shared
         }
     }
 
-    
+    public class Message
+    {
+        public static string GetDataSuccess = "Lấy dữ liệu thành công";
+        public static string GetDataError = "Lấy dữ liệu thất bại";
+        public static string CreateSuccess = "Thêm mới dữ liệu thành công ";
+        public static string CreateError = "Thêm mới dữ liệu Thất bại";
+        public static string UpdateSuccess = "Cập nhật dữ liệu thành công";
+        public static string UpdateError = "Cập nhật dữ liệu Thất bại";
+        public static string DeleteSuccess = "Xóa dữ liệu thành công";
+        public static string DeleteError = "Xóa dữ liệu thất bại";
+    }
     /// <summary>
     /// max loi
     /// </summary>

@@ -10,6 +10,7 @@ using Business.Brand;
 using Business.Category;
 using Business.Certify;
 using Business.Goldk;
+using Business.ItemProduct;
 using Business.SubCategory;
 using Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -98,6 +99,8 @@ namespace eProjectAPI
             services.AddScoped<ICertifyHandller, CertifyHandller>();
             // SubCategory 
             services.AddScoped<ISubCategoryHandller, SubCategoryHandller>();
+            //itemProduct
+            services.AddScoped<IItemProductHandller, ItemProductHandller>();
 
         }
 

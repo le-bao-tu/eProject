@@ -22,7 +22,12 @@ namespace Business.Account
 
         Task<Response> Login(LoginAccountModel accountModel);
 
-        Task<Response> getByNameToken(string email);
+        Task<Response> GetByNameToken(string email);
 
+        Task<Response> GetAccessCode(string email);
+
+        Task<Response> CheckAccessCode(string email , string access_code);
+
+        Task<Response> UpdatePassword(UpdatePawwordModel model);
     }
 }

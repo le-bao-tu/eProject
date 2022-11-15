@@ -25,11 +25,11 @@ namespace Business.Goldk
             int rs = await _myDbContext.SaveChangesAsync();
             if(rs > 0)
             {
-                return new ResponseObject<GoldkModel>(model, "Thêm mới thành công", Code.Success);
+                return new ResponseObject<GoldkModel>(model, $"{Message.CreateSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Thêm mới thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.CreateError}");
             }
         }
 
@@ -40,11 +40,11 @@ namespace Business.Goldk
             int rs = await _myDbContext.SaveChangesAsync();
             if(rs > 0)
             {
-                return new ResponseObject<Guid>(goldkId, "Xóa dữ liệu thành công", Code.Success);
+                return new ResponseObject<Guid>(goldkId, $"{Message.DeleteSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Xóa dữ liệu thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.DeleteError}");
             }
         }
 
@@ -72,11 +72,11 @@ namespace Business.Goldk
             var entity = AutoMapperUtils.AutoMap<Data.DataModel.Goldk, GoldkModel>(data);
             if (entity != null)
             {
-                return new ResponseObject<List<GoldkModel>>(entity, "Lấy dữ liệu thành công ", Code.Success);
+                return new ResponseObject<List<GoldkModel>>(entity, $"{Message.GetDataSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Lấy dữ liệu thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.GetDataError}");
             }
 
         }
@@ -87,11 +87,11 @@ namespace Business.Goldk
             var entity = AutoMapperUtils.AutoMap<Data.DataModel.Goldk, GoldkModel>(data);
             if(entity != null)
             {
-                return new ResponseObject<GoldkModel>(entity, "Lấy dữ liệu thành công ", Code.Success);
+                return new ResponseObject<GoldkModel>(entity, $"{Message.GetDataSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Lấy dữ liệu thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.GetDataError}");
             }
         }
 
@@ -106,11 +106,11 @@ namespace Business.Goldk
             var entity = AutoMapperUtils.AutoMap<Data.DataModel.Goldk, GoldkModel>(data);
             if(entity != null)
             {
-                return new ResponseObject<List<GoldkModel>>(entity, "Lấy dữ liệu thành công", Code.Success);
+                return new ResponseObject<List<GoldkModel>>(entity, $"{Message.GetDataSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Lâys dữ liệu thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.GetDataError}");
             }
         }
 
@@ -121,11 +121,11 @@ namespace Business.Goldk
             int rs = await _myDbContext.SaveChangesAsync();
             if(rs > 0)
             {
-                return new ResponseObject<GoldkModel>(model, "Cập nhật thành công", Code.Success);
+                return new ResponseObject<GoldkModel>(model, $"{Message.UpdateSuccess}", Code.Success);
             }
             else
             {
-                return new ResponseError(Code.ServerError, "Cập nhật thất bại");
+                return new ResponseError(Code.ServerError, $"{Message.UpdateError}");
             }
         }
     }
