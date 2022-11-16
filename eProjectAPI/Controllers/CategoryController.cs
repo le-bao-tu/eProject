@@ -31,7 +31,7 @@ namespace eProjectAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("getAllCategory")]
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(typeof(ResponseObject<List<CategoryModel>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllCategory(CategoryModel model)
         {
@@ -45,7 +45,7 @@ namespace eProjectAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("insertCategory")]
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(typeof(ResponseObject<CategoryModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> IndertCategory(CategoryModel model)
         {
@@ -59,7 +59,7 @@ namespace eProjectAPI.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("updateCategory")]
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(typeof(ResponseObject<CategoryModel>), StatusCodes.Status200OK)]
         public async Task<IActionResult> UpdateCategory(CategoryModel model)
         {
@@ -73,7 +73,7 @@ namespace eProjectAPI.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Route("deleteCategory")]
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(typeof(ResponseObject<Guid>), StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteCategory(Guid cateId)
         {
@@ -87,7 +87,7 @@ namespace eProjectAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("getCategoryById")]
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(typeof(ResponseObject<Guid>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCategoryById(Guid cateId)
         {
@@ -102,7 +102,7 @@ namespace eProjectAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("getCategoryByName")]
-        [Authorize]
+        //[Authorize]
         [ProducesResponseType(typeof(ResponseObject<List<CategoryModel>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetCategoryByName(string cateName)
         {
