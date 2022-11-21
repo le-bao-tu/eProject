@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,8 +15,9 @@ namespace Business.ItemProduct
 
         public int Quantity { get; set; }
 
-        public string ImageProduct { get; set; }
+        public IFormFile Image { get; set; }
 
+        public IList<IFormFile> imageProduct { get; set; }
         /// <summary>
         /// chất lượng sản phẩm 
         /// </summary>

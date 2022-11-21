@@ -309,9 +309,9 @@ namespace Business
                     var lbtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
                     // trả về kết quả cho người dùng username và chuỗi Token 
-                    var dt = new JsonResult(lbtToken);
+                    var dt = lbtToken;
 
-                    return new ResponseObject<JsonResult>(dt, "Đăng nhập thành công ", Code.Success);
+                    return new ResponseObject<String>(dt, "Đăng nhập thành công ", Code.Success);
                 }
                 else
                 {
