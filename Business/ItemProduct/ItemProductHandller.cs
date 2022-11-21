@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.ImageProduct;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Shared;
@@ -12,20 +14,83 @@ namespace Business.ItemProduct
     public class ItemProductHandller : IItemProductHandller
     {
         private readonly MyDB_Context _myDbContext;
-        
-        public ItemProductHandller( MyDB_Context myDbContext)
+        private readonly IImageProductHandller _imageProductHandller;
+
+        public ItemProductHandller( MyDB_Context myDbContext, IImageProductHandller imageProductHandller)
         {
             _myDbContext = myDbContext;
+            _imageProductHandller = imageProductHandller;
         }
 
         public async Task<Response> CreateProduct(ItemProductModel model)
         {
-            model.StyleCode = Utils.RandomStyleCode();
+            Random r = new Random();
+            string num = r.Next().ToString();
+            model.StyleCode = num;
+            // upload file 
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
+            // nếu chưa tòn tại thư mục files thì sẽ tạo thư mục 
+            if(!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            // kiểm tra đuôi file 
+            //var p = Path.GetExtension(model.ImageProduct.FileName);
+            //if(p == ".jpg" || )
+            //{
+
+            //}
+
+            // lấy file của người dùng upload 
+            FileInfo fileInfo = new FileInfo(model.Image.FileName);
+            if(fileInfo != null)
+            {
+                string fileName = fileInfo.Extension;
+
+                string fileNameWithPath = Path.Combine(path, fileName);
+
+                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                {
+                    model.Image.CopyTo(stream);
+                }
+            }
+           
+
             var data = AutoMapperUtils.AutoMap<ItemProductModel, Data.DataModel.ItemProduct>(model);
             _myDbContext.ItemProduct.Add(data);
             int rs = await _myDbContext.SaveChangesAsync();
             if(rs > 0)
             {
+                // upload nhiều ảnh 
+                if (model.imageProduct.Count > 0)
+                {
+                    foreach (var item in model.imageProduct)
+                    {
+                        string pathImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroor/FilesImage");
+                        // nếu chưa tồn tại thư mục chứa nhiều ảnh thì tạo thư mục 
+                        if (!Directory.Exists(pathImage))
+                        {
+                            Directory.CreateDirectory(pathImage);
+                        }
+
+                        string fileNameImage = Path.Combine(path, item.FileName);
+
+                        using (var stream = new FileStream(fileNameImage, FileMode.Create))
+                        {
+                            item.CopyTo(stream);
+
+                            var dt = await _imageProductHandller.InsertImage(new ImageProductModel()
+                            {
+                                Image = model.imageProduct,
+                                ProId = model.StyleCode,
+
+                            });
+
+                        }
+                    }
+                }
+
                 return new ResponseObject<ItemProductModel>(model, $"{Message.CreateSuccess}", Code.Success);
             }
             else

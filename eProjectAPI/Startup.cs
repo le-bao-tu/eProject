@@ -9,8 +9,14 @@ using Business.Account;
 using Business.Brand;
 using Business.Category;
 using Business.Certify;
+using Business.Comment;
+using Business.DimQltyMst;
+using Business.DimQltySubMst;
 using Business.Goldk;
+using Business.ItemDimMst;
 using Business.ItemProduct;
+using Business.StoneMst;
+using Business.StoneQltyMst;
 using Business.SubCategory;
 using Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -101,7 +107,18 @@ namespace eProjectAPI
             services.AddScoped<ISubCategoryHandller, SubCategoryHandller>();
             //itemProduct
             services.AddScoped<IItemProductHandller, ItemProductHandller>();
-
+            // comment
+            services.AddScoped<ICommentHandller, CommentHandller>();
+            // stoneQltyMst
+            services.AddScoped<IStoneQltyMstHandller, StoneQltyMstHandller>();
+            // stoneMst
+            services.AddScoped<IStoneMstHandller, StoneMstHandller>();
+            // dimQltyMst
+            services.AddScoped<IDimQltyMstHandller, DimQltyMstHandller>();
+            // dimQltySubMst
+            services.AddScoped<IDimQltySubMstHandller, DimQltySubMstHandller>();
+            // dimMst
+            services.AddScoped<IDimMstHandller, DimMstHandller>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
