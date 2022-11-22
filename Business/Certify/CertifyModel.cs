@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace Business.Certify
 
         public string CertifyType { get; set; }
 
-        public string ImageCertify { get; set; }
+        public IFormFile ImageCertify { get; set; }
     }
 
     public class CertifyPageModel

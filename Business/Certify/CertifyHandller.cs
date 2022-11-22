@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 
@@ -20,6 +22,35 @@ namespace Business.Certify
 
         public async Task<Response> CreateCertify(CertifyModel model)
         {
+            // upload file 
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
+            // nếu chưa tòn tại thư mục files thì sẽ tạo thư mục 
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            // kiểm tra đuôi file 
+            string fileUpload = Path.GetExtension(model.ImageCertify.FileName).ToLower();
+            if (fileUpload != ".jpeg" || fileUpload != ".png" || fileUpload != ".jpg" || fileUpload != ".mp4" || fileUpload != ".mov")
+            {
+                return new ResponseError(Code.BadRequest, "Định dạng file không được hỗ trợ");
+            }
+
+            // lấy file của người dùng upload 
+            FileInfo fileInfo = new FileInfo(model.ImageCertify.FileName);
+            if (fileInfo != null)
+            {
+                string fileName = fileInfo.Extension;
+
+                string fileNameWithPath = Path.Combine(path, fileName);
+
+                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                {
+                    model.ImageCertify.CopyTo(stream);
+                }
+            }
+
             var data = AutoMapperUtils.AutoMap<CertifyModel, Data.DataModel.Certify>(model);
             _myDbContext.Certify.Add(data);
             int rs = await _myDbContext.SaveChangesAsync();

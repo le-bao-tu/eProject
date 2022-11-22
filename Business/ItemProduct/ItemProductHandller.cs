@@ -36,11 +36,11 @@ namespace Business.ItemProduct
             }
 
             // kiểm tra đuôi file 
-            //var p = Path.GetExtension(model.ImageProduct.FileName);
-            //if(p == ".jpg" || )
-            //{
-
-            //}
+            string file = Path.GetExtension(model.Image.FileName).ToLower();
+            if(file != ".jpeg" || file != ".png" || file != ".jpg" || file != ".mp4" || file != ".mov")
+            {
+                return new ResponseError(Code.BadRequest, "Định dạng file không được hỗ trợ");
+            }
 
             // lấy file của người dùng upload 
             FileInfo fileInfo = new FileInfo(model.Image.FileName);
